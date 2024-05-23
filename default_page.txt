@@ -1,0 +1,136 @@
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Inter, Newsreader, Roboto } from "next/font/google";
+import { FunctionComponent } from "react";
+import { SlSocialLinkedin } from "react-icons/sl";
+
+const inter = Inter({ weight: "500", subsets: ["latin"] });
+const inter400 = Inter({ weight: "400", subsets: ["latin"] });
+const roboto = Roboto({ weight: "300", subsets: ["latin"] })
+const newsreader = Newsreader({ weight: "400", style: ["italic"], subsets: ["latin"] })
+
+export default function Home() {
+  const projects = [
+    {
+      image: '/project1.jpg',
+      title: 'Project 1',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam urna eu odio tincidunt, vel tristique purus fringilla. Donec fringilla ligula at justo tristique, sed dapibus velit aliquam.',
+      techStack: ['Next.js', 'Tailwind CSS', 'React']
+    },
+    {
+      image: '/project2.jpg',
+      title: 'Project 2',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam urna eu odio tincidunt, vel tristique purus fringilla. Donec fringilla ligula at justo tristique, sed dapibus velit aliquam.',
+      techStack: ['Next.js', 'Tailwind CSS', 'MongoDB']
+    },
+  ];
+
+  return (
+    <div className="flex flex-wrap h-100 justify-center">
+      <div className="flex flex-col gap-10 w-3/4 md:w-3/5 lg:w-3/5 xl:w-2/5 py-36">
+        <h1 className={`${inter.className} text-base`}>Dominic A. Henry</h1>
+        <div className={`${roboto.className} flex flex-col gap-4 text-sm`}>
+          <p>
+            <span className={`${newsreader.className} text-base`}>Passionate</span> about collaborating with teams to implement and document complex issues through software systems.
+          </p>
+          <p>
+            A problem solver at heart. I learn, observe, and systemize solutions.
+          </p>
+          <p className={`${newsreader.className} text-base`}>Turning challenges into innovation opportunities.</p>
+        </div>
+
+        <div className="flex flex-col justify-between gap-4">
+          <div>
+            <Accordion type="single" collapsible>
+              <AccordionItem value="item-1">
+                <AccordionTrigger>
+                  <h2 className={`text-xs text-slate-500`}>Work Projects</h2>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className="text-xs">
+                    {projects.map((project, index) => (
+                      <ProjectCard key={index} {...project} />
+                    ))}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </div>
+
+          <div>
+            <Accordion type="single" collapsible>
+              <AccordionItem value="item-1">
+                <AccordionTrigger>
+                  <h2 className={`text-xs text-slate-500`}>Personal Projects</h2>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className="text-xs">
+                    {projects.map((project, index) => (
+                      <ProjectCard key={index} {...project} />
+                    ))}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </div>
+
+          <div>
+            <Accordion type="single" collapsible>
+              <AccordionItem value="item-1">
+                <AccordionTrigger>
+                  <h2 className={`text-xs text-slate-500`}>Writing</h2>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className="text-xs">
+                    {projects.map((project, index) => (
+                      <ProjectCard key={index} {...project} />
+                    ))}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4">
+          <h2 className={`${inter400.className} text-sm`}>About me.</h2>
+          <p className={`${roboto.className} text-sm`}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porttitor eros nec enim maximus, a malesuada nisi aliquet. Duis eu enim arcu. Morbi at lacinia nisl. Mauris ac dapibus lacus. Maecenas facilisis odio lacus, sagittis dictum mauris pellentesque a. Quisque sit amet dapibus magna, ut venenatis enim. Mauris aliquam eget nunc ut vehicula. Quisque quis risus elementum, egestas diam eu, molestie justo.
+          </p>
+          <p className={`${roboto.className} text-sm`}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porttitor eros nec enim maximus, a malesuada nisi aliquet. Duis eu enim arcu. Morbi at lacinia nisl. Mauris ac dapibus lacus. Maecenas facilisis odio lacus, sagittis dictum mauris pellentesque a. Quisque sit amet dapibus magna, ut venenatis enim. Mauris aliquam eget nunc ut vehicula. Quisque quis risus elementum, egestas diam eu, molestie justo.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-4">
+          <h2 className={`${inter400.className} text-sm`}>Contact Me.</h2>
+          <p className={`${roboto.className} text-sm`}>Reach me at <a className="underline" href="https://www.linkedin.com/in/dominic-henry-379404190/">@Dominic Henry</a> or <a className="underline" href="mailto:dominichenrywork@hotmail.com">dominichenrywork@hotmail.com</a>.</p>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+interface Props {
+  image: string;
+  title: string;
+  description: string;
+  techStack: string[];
+}
+
+const ProjectCard: FunctionComponent<Props> = ({ image, title, description, techStack }) => {
+  return (
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden m-4">
+      <img className="w-full h-64 object-cover object-center" src={image} alt={title} />
+      <div className="p-6">
+        <h2 className="text-sm font-semibold mb-2">{title}</h2>
+        <p className="text-gray-700 mb-4">{description}</p>
+        <div className="flex flex-wrap">
+          {techStack.map((tech, index) => (
+            <span key={index} className="bg-black text-white rounded-sm px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{tech}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
