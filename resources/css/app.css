@@ -1,3 +1,58 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.project_section .closeIcon {
+    @apply hidden;
+}
+
+.project_section.active .openIcon {
+    @apply hidden;
+}
+
+.project_section.active .closeIcon {
+    @apply block;
+}
+
+.project_section:not(.active) .project_list{
+    @apply h-0 overflow-hidden;
+}
+
+
+.project_section {
+    @apply flex flex-col gap-4;
+}
+
+.project_section_header {
+     @apply flex justify-between items-center border-b border-slate-300 p-2 cursor-pointer;
+     @apply transition-all duration-200;
+}
+
+.project_section_header:hover {
+     @apply bg-slate-200;
+}
+
+.project_section_header h2 {
+    @apply text-xs text-slate-500;
+}
+
+.closeIcon, .openIcon {
+    @apply w-6 h-6;
+}
+
+.project_section .project_list {
+    @apply grid gap-3 text-xs;
+    /* @apply easeain-out duration-500; */
+}
+
+@screen sm {
+    .project_list {
+        @apply grid-cols-1;
+    }
+}
+
+@screen md {
+    .project_list {
+        @apply grid-cols-2;
+    }
+}

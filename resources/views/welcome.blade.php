@@ -24,60 +24,38 @@
         <div class="flex flex-col gap-10 w-3/4 xl:w-1/2 py-24">
 
             <h1 class="font-inter text-base">Dominic A. Henry</h1>
-            <div class="font-roboto flex flex-col gap-4 text-sm">
+            <div class="font-roboto flex flex-col gap-4 text-xs">
                 <p>
-                    <span class="font-newsreader italic text-base">Passionate</span> about solving complex issues through software engineering. A problem solver at heart. I learn, observe, and create systems.
+                    <span class="font-newsreader italic">Passionate</span> about solving complex issues through software engineering. A problem solver at heart. I learn, observe, and create systems.
                 </p>
             </div>
 
+            <!-- Projects Section -->
             <div class="flex flex-col justify-between gap-4">
-                <div>
-                    <h2 class="text-xs text-slate-500">Work Projects</h2>
-                    <div class="grid md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 gap-3 text-xs">
-                        @foreach ($workProjects as $project)
-                        <x-project-card :project="$project" />
-                        @endforeach
-                    </div>
-                </div>
-
-                <div>
-                    <h2 class="text-xs text-slate-500">Personal Projects</h2>
-                    <div class="grid md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 gap-3 text-xs">
-                        @foreach ($personalProjects as $project)
-                        <x-project-card :$project />
-                        @endforeach
-                    </div>
-                </div>
-
-                <div>
-                    <h2 class="text-xs text-slate-500">Writing</h2>
-                    <div class="grid md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 gap-3 text-xs">
-                        @foreach ($writings as $project)
-                        <x-project-card :$project />
-                        @endforeach
-                    </div>
-                </div>
+                <x-project-accordion section-title="Work Projects" :projects="$workProjects" />
+                <x-project-accordion section-title="Personal Projects" :projects="$personalProjects" />
+                <x-project-accordion section-title="Writing" :projects="$writings" />
             </div>
 
             <div class="flex flex-col gap-4">
                 <h2 class="font-inter">About me.</h2>
-                <div class="flex flex-col gap-4 text-sm font-roboto">
+                <div class="flex gap-6 text-xs font-roboto">
                     <div class="flex flex-col gap-4">
-                        <p class="font-roboto text-sm">
+                        <p>
                             I'm a passionate Software Engineer with a Bachelor's degree in Computer Science from the University of the West Indies, Mona. I thrive in start-up and small company environments, where I can contribute to innovative and dynamic projects.
                         </p>
 
-                        <p class="font-roboto text-sm">
+                        <p>
                             Outside of work, I'm a fitness enthusiast and hybrid athlete who loves hard challenges. I continuously seek to push my physical and mental limits.
                         </p>
 
-                        <p class="font-roboto text-sm">
+                        <p>
                             Whether it's solving complex coding problems or pushing my physical limits, I approach every challenge with determination. This combination of technical expertise and a drive for personal growth defines who I am and fuels my ambition.
                         </p>
                     </div>
 
                     <div class="flex justify-center">
-                        <img src="{{ url('headshot_image.jpeg') }}" class="w-32" />
+                        <img src="{{ url('headshot_image.jpeg') }}" class="w-96" />
                     </div>
                 </div>
             </div>
@@ -85,17 +63,31 @@
             <div class="flex flex-col gap-4">
                 <h2 class="${inter400.class}">Contact Me.</h2>
 
-                <p class="font-roboto text-sm">
+                <p class="font-roboto text-xs">
                     Reach me at <a class="underline" href="https://www.linkedin.com/in/dominic-henry-379404190/">@Dominic Henry</a> on LinkedIn or <a class="underline" href="mailto:dominichenrywork@hotmail.com">dominichenrywork@hotmail.com</a>.
                 </p>
 
-                <p class="font-roboto text-sm">
+                <p class="font-roboto text-xs">
                     You can also follow on X (formerly Twitter) <a class="underline" href="https://x.com/dominic_a_henry">@dominic_a_henry</a> for updates on what I’m currently working on.
                 </p>
             </div>
 
         </div>
     </div>
+
+    <script>
+        const project_sections = document.querySelectorAll(".project_section .project_section_header");
+        project_sections.forEach(project_section => {
+            project_section.addEventListener('click', (e) => {
+                project_sections.forEach((el) => {
+                    if(e.target.parentElement != el.parentElement) {
+                        el.parentElement.classList.remove('active');
+                    }
+                });
+                e.target.parentElement.classList.toggle('active');
+            });
+        })
+    </script>
 </body>
 
 </html>
